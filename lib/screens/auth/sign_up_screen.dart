@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -246,55 +248,118 @@ class _SignUpScreenState extends State<SignUpScreen>
       _scaleController.forward();
       _loadingController.repeat();
 
-      // Simulate API call
-      await Future.delayed(const Duration(seconds: 3));
+      try {
+        // Parse full name into first and last names
+        final nameParts = _nameController.text.trim().split(' ');
+        final firstName = nameParts.isNotEmpty ? nameParts[0] : '';
+        final lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
 
-      // Simulate success
-      bool success = true;
+        // Use AuthProvider for registration
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
-      if (success) {
-        setState(() {
-          _showSuccess = true;
-        });
+        print('🚀 Starting registration process...');
+        print('👤 Name parts: $nameParts');
+        print('👤 First name: $firstName');
+        print('👤 Last name: $lastName');
+        print('📧 Email: ${_emailController.text.trim()}');
 
-        _successController.forward();
-        HapticFeedback.lightImpact();
+        final success = await authProvider.register(
+          email: _emailController.text.trim(),
+          username: _emailController.text.trim().split('@')[0], // Generate username from email
+          firstName: firstName,
+          lastName: lastName,
+          password: _passwordController.text,
+          passwordConfirm: _confirmPasswordController.text,
+        );
 
-        // Show success message
+        print('📱 SignUpScreen - Registration result: $success');
+        print('📱 SignUpScreen - AuthProvider error: ${authProvider.error}');
+        print('📱 SignUpScreen - AuthProvider isLoading: ${authProvider.isLoading}');
+        print('📱 SignUpScreen - AuthProvider isAuthenticated: ${authProvider.isAuthenticated}');
+
+        if (success) {
+          print('🎉 SignUpScreen - Registration successful! Showing success UI...');
+          setState(() {
+            _showSuccess = true;
+          });
+
+          _successController.forward();
+          HapticFeedback.lightImpact();
+
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Row(
+                children: [
+                  const Icon(Icons.check_circle, color: Colors.white),
+                  const SizedBox(width: 8),
+                  const Text('Account created successfully!'),
+                ],
+              ),
+              backgroundColor: Colors.green[400],
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
+
+          // Navigate to sign in after delay
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pushReplacementNamed(context, '/SignInScreen');
+          });
+        } else {
+          // Error - show the actual API error message
+          _shakeForm();
+          print('❌ Registration failed - check console for details');
+
+          // Get the actual error message from AuthProvider
+          final errorMessage = authProvider.error ?? 'Registration failed';
+          print('📱 Showing error to user: $errorMessage');
+
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: Colors.red[400],
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
+        }
+      } catch (e) {
+        print('💥 SignUp screen exception: $e');
+        HapticFeedback.heavyImpact();
+        _shakeForm();
+
+        // Show error message from AuthProvider
+        final authProvider = Provider.of<AuthProvider>(context, listen: false);
+        final errorMessage = authProvider.error ?? 'Registration failed: ${e.toString()}';
+
+        print('📱 Showing error to user: $errorMessage');
+
+        // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Row(
-              children: [
-                const Icon(Icons.check_circle, color: Colors.white),
-                const SizedBox(width: 8),
-                const Text('Account created successfully!'),
-              ],
-            ),
-            backgroundColor: Colors.green[400],
+            content: Text(errorMessage),
+            backgroundColor: Colors.red[400],
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
         );
-
-        // Navigate to sign in after delay
-        Future.delayed(const Duration(seconds: 2), () {
-          // Navigator.pushReplacementNamed(context, '/signin');
-          print('Navigate to Sign In');
+      } finally {
+        setState(() {
+          _isLoading = false;
         });
-      } else {
-        HapticFeedback.heavyImpact();
-        _shakeForm();
+
+        _scaleController.reverse();
+        _loadingController.stop();
+        _loadingController.reset();
       }
-
-      setState(() {
-        _isLoading = false;
-      });
-
-      _scaleController.reverse();
-      _loadingController.stop();
-      _loadingController.reset();
     } else {
       _shakeForm();
       HapticFeedback.lightImpact();
@@ -798,6 +863,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                       return Colors.grey[400];
                                     }
                                     if (_showSuccess) {
+                                      print('🎨 Button showing SUCCESS state');
                                       return Colors.green[500];
                                     }
                                     return const Color(0xFF2F855A);

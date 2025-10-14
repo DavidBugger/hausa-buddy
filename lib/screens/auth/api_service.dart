@@ -217,18 +217,14 @@ class ApiService {
           return ApiResponse<T>.success(result);
         }
         print('🎯 Returning raw data');
-        // Handle Map type conversion from dynamic to String keys
-        if (T.toString() == 'Map<String, dynamic>' && responseBody is Map) {
-          return ApiResponse<T>.success(Map<String, dynamic>.from(responseBody) as T);
-        }
         return ApiResponse<T>.success(responseBody as T);
       } else {
         print('❌ Request failed with status: ${response.statusCode}');
         String errorMessage = 'Request failed';
-        if (responseBody is Map) {
+        if (responseBody is Map<String, dynamic>) {
           // Handle field-specific errors
           final fieldErrors = <String>[];
-          (responseBody as Map).forEach((key, value) {
+          responseBody.forEach((key, value) {
             if (value is List && value.isNotEmpty) {
               fieldErrors.add('$key: ${value[0]}');
             } else if (value is String) {

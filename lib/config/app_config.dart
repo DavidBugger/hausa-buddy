@@ -9,7 +9,7 @@ class AppConfig {
   static const int darkText = 0xFF1A202C;
 
   // API Configuration
-  static const String baseUrl = 'https://api.learnhausa.com';
+  static const String baseUrl = 'http://learn.spacevest.com.ng/api/v1';
   static const Duration apiTimeout = Duration(seconds: 30);
 
   // Local Storage Keys
