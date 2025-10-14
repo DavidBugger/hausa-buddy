@@ -1,9 +1,27 @@
-Here’s a professional and engaging **`README.md`** for your GitHub repo of the **Hausa Language Learning App (HausaBuddy)** — tailored for a startup-grade, grant-ready presentation:
 
----
-
-```markdown
 # 🗣️ HausaBuddy — Learn Hausa the Smart Way
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Flutter](https://img.shields.io/badge/Flutter-3.13-blue)](https://flutter.dev/)
+[![Django](https://img.shields.io/badge/Django-4.2-green)](https://www.djangoproject.com/)
+
+## � Table of Contents
+
+- [🚀 Project Overview](#-project-overview)
+- [🎯 Core Objectives](#-core-objectives)
+- [🧠 Key Features](#-key-features)
+- [🧩 Tech Stack](#-tech-stack)
+- [🗂️ Folder Structure](#%EF%B8%8F-folder-structure-flutter)
+- [🧱 Django Models Overview](#-django-models-overview)
+- [🔌 API Endpoints](#-api-endpoints-sample)
+- [⚙️ Getting Started](#%EF%B8%8F-getting-started)
+- [🧭 Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [💼 About the Project Lead](#-about-the-project-lead)
+- [🏆 License](#-license)
+
+# �🗣️ HausaBuddy — Learn Hausa the Smart Way
 
 > **Empowering communication through technology and culture.**  
 > HausaBuddy is an intelligent language learning platform designed to help users — especially corps members, travelers, and professionals — learn the **Hausa language** quickly and interactively through AI-powered features like **Text-to-Speech, Quizzes, Audio Lessons, and Chat-based Learning**.
@@ -71,7 +89,7 @@ HausaBuddy_app/
 ├── pubspec.yaml
 └── README.md
 
-````
+```
 
 ---
 
@@ -130,6 +148,28 @@ cd ../HausaBuddy_app
 flutter pub get
 flutter run
 ```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+1. **Report Bugs**: File an issue if you find any bugs
+2. **Suggest Features**: Share your ideas for new features
+3. **Submit Pull Requests**: Help us improve the codebase
+4. **Improve Documentation**: Help make our docs better
+5. **Spread the Word**: Share HausaBuddy with others
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+### 🛠️ Development Setup
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
