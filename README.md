@@ -114,7 +114,7 @@ HausaBuddy_app/
 | `/api/quizzes/` | GET | Get quiz questions |
 | `/api/chat/` | POST | Interact with AI tutor |
 
-> Full documentation: [Postman Collection](./docs/HausaBuddy.postman_collection.json)
+<!-- > Full documentation: [Postman Collection](./docs/HausaBuddy.postman_collection.json) -->
 
 ---
 
@@ -186,19 +186,19 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our co
 
 ## 💼 About the Project Lead
 
-**👤 Abdulsalam Usman (Dev Dave)**
-Full-Stack Developer | AI & EdTech Innovator | Founder of HausaBuddy
+**👤 Akanang David Ignatius (Dev Dave)**
+Full-Stack Developer | Mobile App Developer | AI & EdTech Innovator | Founder of HausaBuddy
 📍 Abuja, Nigeria
 
-* 🌐 [LinkedIn](https://linkedin.com/in/abdulsalamusman)
-* 💻 [Portfolio](https://urdata.com.ng)
+* 🌐 [LinkedIn](https://www.linkedin.com/in/david-akanang-0789771a4/)
+* 💻 [Portfolio](https://github.com/DavidBugger)
 * 📧 [devdaveofficial@gmail.com](mailto:devdaveofficial@gmail.com)
 
 ---
 
 ## 🏆 License
 
-This project is licensed under the **MIT License** — free for learning and open collaboration.
+This project is licensed under the **MIT License** — is not free for learning but only for open collaboration.
 
 ---
 
